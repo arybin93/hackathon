@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, "../static/")
+
+
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'Админ панель',
+    'LIST_PER_PAGE': 15,
+    'SEARCH_URL': '',
+    'MENU': (
+        {
+            'label': 'Справочники',
+            'models': [
+                {'label': 'Уровни доступа', 'url': 'app.AccessLevel'},
+                {'label': 'Тип документов', 'url': 'app.TypeDocument'},
+                {'label': 'Тип оборудования', 'url': 'app.EquipmentType'}
+            ]
+        },
+        {
+            'label': 'Основной раздел',
+            'models': [
+                {'label': 'События', 'url': 'app.Event', 'permissions': 'app.add_event'},
+                {'label': 'Пропуски', 'url': 'app.Permit', 'permissions': 'app.add_permit'},
+                {'label': 'Сотрудники', 'url': 'app.Person'},
+                {'label': 'Документы', 'url': 'app.Document'},
+                {'label': 'Оборудование', 'url': 'app.Equipment'},
+            ]
+        },
+        {'app': 'auth', 'label': 'Пользователи', 'icon': 'icon-lock'},
+    )
+}
