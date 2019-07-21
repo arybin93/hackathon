@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app'
+    'django_forms_bootstrap',
+    'app',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = 'media/'
 
 STATIC_URL = '/static/'
 

@@ -1,0 +1,149 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block content %}
+    <br>
+    <section class="worker">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">{{ person }}</div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col">Должность: <span>{{ person.position }}</span></div>
+                        <div class="col">Пропуск: <span>{{ person.permit }}</span></div>
+                        <div class="col">Доступ:
+                            <p><span>{{ person.permit.date_from }} - {{ person.permit.date_to }}</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"><button type="button" class="btn btn-danger">Удалить сотрудника</button></div>
+            </div>
+
+            <div class="accordion mt-3" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Документы сотрудника
+                    </button>
+                  </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Тип документа</th>
+                              <th scope="col">Срок действия</th>
+                              <th scope="col">Название</th>
+                              <th scope="col">Статус проверки</th>
+                              <th scope="col"></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">Мед. справка 5H</th>
+                              <td>12.05.2019 - 12.08.2019</td>
+                              <td>spravca.doc</td>
+                              <td>проверено</td>
+                              <td><button type="button" class="btn btn-outline-info"><span class="pencil">ред.</span></button></td>
+                              <td><button type="button" class="btn btn-outline-danger">Удалить</button></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Сертификат на работы 53Ф</th>
+                              <td>12.05.2019 - 12.08.2019</td>
+                              <td>spravca.doc</td>
+                              <td>отправить на проверку</td>
+                              <td><button type="button" class="btn btn-outline-info"><span class="pencil">ред.</span></button></td>
+                              <td><button type="button" class="btn btn-outline-danger">Удалить</button></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Инструктаж безопасности</th>
+                              <td>12.05.2019 - 12.08.2019</td>
+                              <td>introduction.doc</td>
+                              <td>отклонено</td>
+                              <td><button type="button" class="btn btn-outline-info"><span class="pencil">ред.</span></button></td>
+                              <td><button type="button" class="btn btn-outline-danger">Удалить</button></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Паспорт</th>
+                              <td>12.05.2019 - 12.08.2019</td>
+                              <td>не загружено</td>
+                              <td>не проверено</td>
+                              <td><button type="button" class="btn btn-outline-info"><span class="pencil">ред.</span></button></td>
+                              <td><button type="button" class="btn btn-outline-danger">Удалить</button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                              <button type="button" class="btn btn-outline-success mt-3">Добавить документ</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Оборудование сотрудника
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                          <th scope="col">Тип оборудования</th>
+                          <th scope="col">Модель</th>
+                          <th scope="col">Идентификационный номер</th>
+                          <th scope="col">Разрешение на ввоз</th>
+                          <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <th scope="row">Автомобиль</th>
+                          <td>Мерседес спринтер</td>
+                          <td>ВА567rus52</td>
+                          <td>разрешено</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Станок фрезерный</th>
+                          <td>ВА 361873 апр</td>
+                          <td>17289173648192748</td>
+                          <td>Запрещено</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Станок фрезерный</th>
+                          <td>ВА 361873 апр</td>
+                          <td>17289173648192748</td>
+                          <td>Не проверено</td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        <button type="button" class="btn btn-outline-success">Добавить оборудование</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      График работы сотрудника
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <button type="button" class="btn btn-outline-success">Добавить график работы</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>	<!-- container -->
+    </section>
+{% endblock %}

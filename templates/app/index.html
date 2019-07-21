@@ -1,0 +1,61 @@
+{% extends 'app/base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block content %}
+         <br>
+         <!--form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Введите ФИО" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+         </form-->
+         <div class="buttons">
+            <button type="button" class="btn btn-success">Добавить нового сотрудника</button>
+            <div class="ask-for"><button type="button" class="btn btn-warning">Запросить пропуск</button></div>
+         </div>
+
+          {% if persons %}
+            <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Должность</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Действия</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for person in persons %}
+                    <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ person }}</td>
+                    <td>{{ person.position }}</td>
+                    <td>{{ person.get_status_display }}</td>
+                    <td><a href="{{ person.edit_url }}"
+                           class="btn btn-info">
+                           <span>Ред</span>
+                    </a>
+                    </td>
+                        <td><input class="worker-checkbox" id="worker-checkbox" type="checkbox" value="">
+                        <label for="worker-checkbox"></label> </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <!--div class="container">
+                <nav aria-label="Page navigation example" class="pagination">
+                    <ul class="pagination">
+                      <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+            </div-->
+          {% else %}
+              <p>Сотрудники не добавлены</p>
+          {% endif %}
+{% endblock %}

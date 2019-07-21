@@ -1,0 +1,72 @@
+h1.main-title {
+    color: #007bff;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.table  {
+    margin-top: 20px;
+}
+
+.pagination {
+    width: 400px;
+    margin: 0 auto;
+
+}
+
+button {
+    position: relative;
+}
+
+.btn-outline-info {
+  padding-left: 30px;
+}
+
+span.pencil::before {
+  content:"";
+  position: absolute;
+  background: URL("icons/pencil.png") no-repeat 50% 50%;
+  background-size: contain;
+  width: 15px;
+  height: 15px;
+  top: 11px;
+  left: 7px;
+}
+
+.ask-for {
+  float:right;
+  padding-right: 50px;
+}
+
+input[type="checkbox"] {
+  visibility:hidden;
+}
+
+input[type="checkbox"] + label {
+  border:1px solid #007bff;
+  border-radius: 5px;
+  display:inline-block;
+  width:19px;
+  height:19px;
+  vertical-align:middle;
+  cursor:pointer;
+}
+input[type="checkbox"]:checked + label {
+  background:url("icons/check.png") no-repeat 50% 50%;
+  background-size: contain;
+}
+
+.ask-for {
+  float:right;
+  padding-right: 30px;
+}
+
+.buttons {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
