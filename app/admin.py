@@ -85,6 +85,15 @@ admin.site.register(Equipment, EquipmentAdmin)
 
 
 class EventAdmin(admin.ModelAdmin):
+    list_display = ['event_type', 'get_persons', 'status']
+    list_filter = ['status', 'event_type']
     model = Event
+
+    def get_persons(self, obj):
+        if obj.persons.all():
+            return ','.join([person.last_name for person in obj.persons.all()])
+        else:
+            return '-'
+    get_persons.short_description = 'Люди'
 
 admin.site.register(Event, EventAdmin)

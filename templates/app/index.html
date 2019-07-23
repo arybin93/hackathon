@@ -10,9 +10,14 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Введите ФИО" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
          </form-->
+         <div class="alert alert-success hidden" id="success-alert">
+             <button type="button" class="close">x</button>
+             <span class="glyphicon glyphicon-ok"></span>
+             <p>Заявка отправлена!</p>
+         </div>
          <div class="buttons">
             <button type="button" class="btn btn-success">Добавить нового сотрудника</button>
-            <div class="ask-for"><button type="button" class="btn btn-warning">Запросить пропуск</button></div>
+            <div class="ask-for"><button type="button" id="ask_for_permit" class="btn btn-warning">Заявка на пропуск</button></div>
          </div>
 
           {% if persons %}
@@ -24,13 +29,14 @@
                     <th scope="col">Должность</th>
                     <th scope="col">Статус</th>
                     <th scope="col">Действия</th>
+                    <th scope="col">Выбор</th>
                   </tr>
                 </thead>
                 <tbody>
                 {% for person in persons %}
                     <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td>{{ person }}</td>
+                    <td id="{{ person.id }}">{{ person }}</td>
                     <td>{{ person.position }}</td>
                     <td>{{ person.get_status_display }}</td>
                     <td><a href="{{ person.edit_url }}"
@@ -38,8 +44,10 @@
                            <span>Ред</span>
                     </a>
                     </td>
-                        <td><input class="worker-checkbox" id="worker-checkbox" type="checkbox" value="">
-                        <label for="worker-checkbox"></label> </td>
+                    <td>
+                        <input class="worker-checkbox" id="worker-checkbox-{{ person.id }}" type="checkbox" value="{{ person.id }}">
+                        <label for="worker-checkbox-{{ person.id }}"></label>
+                    </td>
                   </tr>
                 {% endfor %}
                 </tbody>

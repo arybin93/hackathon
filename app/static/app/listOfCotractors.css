@@ -55,8 +55,10 @@ input[type="checkbox"] + label {
   vertical-align:middle;
   cursor:pointer;
 }
+
+
 input[type="checkbox"]:checked + label {
-  background:url("icons/check.png") no-repeat 50% 50%;
+  background:url("/static/app/icons/check.png") no-repeat 50% 50%;
   background-size: contain;
 }
 

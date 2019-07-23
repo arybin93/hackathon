@@ -57,9 +57,11 @@ class Person(TimeStampedModel):
     NOT_ACTIVE = 0
     ACTIVE = 1
     EXPIRED = 2
+    IN_PROCESS = 3
 
     STATUS_TYPES = (
         (NOT_ACTIVE, 'Не активен'),
+        (IN_PROCESS, 'На рассмотрении'),
         (ACTIVE, 'Активный'),
         (EXPIRED, 'Просрочен документ')
     )
@@ -74,6 +76,9 @@ class Person(TimeStampedModel):
 
     def edit_url(self):
         return "/lk/person/{}/".format(self.id)
+
+    def add_doc_url(self):
+        return "/lk/person/{}/add_doc".format(self.id)
 
     def __str__(self):
         return '{} {}'.format(self.last_name, self.first_name)
@@ -110,7 +115,7 @@ class Document(TimeStampedModel):
         (CANCELLED, 'Отклонён')
     )
 
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Сотрудник')
+    person = models.ForeignKey(Person, related_name='documents', on_delete=models.CASCADE, verbose_name='Сотрудник')
     type_doc = models.ForeignKey(TypeDocument, on_delete=models.CASCADE, verbose_name='Тип документа')
     date_from = models.DateTimeField(blank=True, verbose_name='Срок действия (от)', help_text='Дата и время (от)')
     date_to = models.DateTimeField(blank=True, verbose_name='Срок действия (до)', help_text='Дата и время (до)')
@@ -186,11 +191,11 @@ class Event(TimeStampedModel):
     )
 
     event_type = models.PositiveIntegerField(default=CHANGES_DATA, choices=EVENT_TYPES, verbose_name='Тип события')
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Сотрудник')
+    persons = models.ManyToManyField(Person, verbose_name='Сотрудники')
     status = models.PositiveIntegerField(default=NEW, choices=STATUS_TYPES, verbose_name='Статус')
 
     def __str__(self):
-        return '{} {}'.format(self.get_event_type_display(), self.person)
+        return '{}'.format(self.get_event_type_display())
 
     class Meta:
         verbose_name = 'Событие'
